@@ -1,0 +1,248 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    background-color: #1e88e5;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+header p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.chat-box {
+    height: 400px;
+    padding: 15px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+/* ===== CHAT BUBBLES ===== */
+.message {
+    margin-bottom: 15px;
+    padding: 12px 15px;
+    border-radius: 18px;
+    max-width: 80%;
+    word-wrap: break-word;
+    position: relative;
+    line-height: 1.4;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.user-message {
+    background-color: #1e88e5;
+    color: white;
+    margin-left: auto;
+    border-bottom-right-radius: 4px;
+    animation: slideInRight 0.3s ease;
+}
+
+.bot-message {
+    background-color: #e3f2fd;
+    color: #333;
+    margin-right: auto;
+    border-bottom-left-radius: 4px;
+    animation: slideInLeft 0.3s ease;
+}
+
+/* Speech bubble pointers */
+.user-message::after {
+    content: '';
+    position: absolute;
+    right: -5px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-left-color: #1e88e5;
+    border-right: 0;
+}
+
+.bot-message::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 10px;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-right-color: #e3f2fd;
+    border-left: 0;
+}
+
+/* Animations */
+@keyframes slideInLeft {
+    from { transform: translateX(-20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(20px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+/* Timestamps */
+.message-time {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    text-align: right;
+    margin-top: 4px;
+    display: block;
+}
+
+.user-message .message-time {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.bot-message .message-time {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/* Links */
+.bot-message a {
+    color: #1565c0;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+/* Typing indicator */
+.typing {
+    display: flex;
+    align-items: center;
+    height: 20px;
+}
+
+.typing span {
+    width: 8px;
+    height: 8px;
+    background: #666;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 2px;
+    animation: typing 1s infinite ease-in-out;
+}
+
+.typing span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes typing {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Input area */
+.input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #e0e0e0;
+    background-color: white;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.input-area button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #1e88e5;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.input-area button:hover {
+    background-color: #1565c0;
+}
+
+/* Quick questions */
+.quick-questions {
+    padding: 10px 15px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #e0e0e0;
+}
+
+.quick-questions p {
+    margin: 0 0 10px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.quick-btn {
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 8px 12px;
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+    background-color: #bbdefb;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .message {
+        max-width: 90%;
+        padding: 10px 12px;
+    }
+    
+    .user-message::after, 
+    .bot-message::before {
+        display: none;
+    }
+    
+    .input-area {
+        padding: 8px;
+    }
+    
+    .input-area input {
+        padding: 8px;
+    }
+    
+    .input-area button {
+        padding: 8px 15px;
+    }
+}
